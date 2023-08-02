@@ -1,0 +1,2 @@
+FROM rancher/opni@sha256:eae9b68a5bf90b5d5ce5094d6f92c7a817df2fd47041870b6973d2be53a4db97
+LABEL MAINTAINER="hillzhang"
