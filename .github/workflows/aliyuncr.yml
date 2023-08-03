@@ -33,4 +33,4 @@ jobs:
             PLATFORM: linux/amd64
         run: |
           docker build --platform $PLATFORM -t registry.cn-hangzhou.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG -f $CONTEXT/Dockerfile --push
-          
+          docker push registry.cn-hangzhou.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG
