@@ -32,5 +32,5 @@ jobs:
             CONTEXT: kube-rbac-proxy
             PLATFORM: linux/amd64
         run: |
-          docker buildx build --platform $PLATFORM -t registry.cn-hangzhou.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG -f $CONTEXT/Dockerfile .
-          docker push registry.cn-hangzhou.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG
+          docker buildx build --platform $PLATFORM -t registry.cn-beijing.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG -f $CONTEXT/Dockerfile .
+          docker push registry.cn-beijing.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG
