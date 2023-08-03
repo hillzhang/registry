@@ -35,9 +35,7 @@ jobs:
           # DOCKERHUB_TOKEN: docker hub => Account Setting => Security 创建.
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # 通过 git 命令获取当前 tag 信息, 存入环境变量 APP_VERSION
-      - name: Generate App Version
-        run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
+
       # 构建 Docker 并推送到 Docker hub
       - name: Build and push
         id: docker_build
@@ -49,6 +47,9 @@ jobs:
           # 生成多平台镜像, see https://github.com/docker-library/bashbrew/blob/v0.1.1/architecture/oci-platform.go
           platforms: |
             linux/amd64
+            linux/arm64/v8
+            linux/arm64
+            
           # 生成两个 docker tag: ${APP_VERSION} 和 latest
           tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ env.TAG }}
