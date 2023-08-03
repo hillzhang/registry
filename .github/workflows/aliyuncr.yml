@@ -1,0 +1,35 @@
+name: Build and Push Docker Image To Aliyun
+
+# push tag 时触发执行
+on:
+  workflow_dispatch:
+
+
+jobs:
+  main:
+    # 在 Ubuntu 上运行
+    runs-on: ubuntu-latest
+    steps:
+      # git checkout 代码
+      - name: Checkout
+        uses: actions/checkout@v2
+      # 设置 QEMU, 后面 docker buildx 依赖此.
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      # 设置 Docker buildx, 方便构建 Multi platform 镜像
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to ACR
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: https://registry.cn-hangzhou.aliyuncs.com
+          username: "${{ secrets.REGISTRY_USERNAME }}"
+          password: "${{ secrets.REGISTRY_PASSWORD }}"
+      - name: Build and push image
+        env:
+            DOCKERHUB_REPO: kube-rbac-proxy
+            IMAGE_TAG: v0.5.0
+            CONTEXT: kube-rbac-proxy
+        run: |
+          docker build -t registry.cn-hangzhou.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG -f $CONTEXT/Dockerfile
+          docker push registry.cn-hangzhou.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG
