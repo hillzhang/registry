@@ -27,9 +27,9 @@ jobs:
           password: "${{ secrets.REGISTRY_PASSWORD }}"
       - name: Build and push image
         env:
-            DOCKERHUB_REPO: kube-rbac-proxy
-            IMAGE_TAG: v0.5.0
-            CONTEXT: kube-rbac-proxy
+            DOCKERHUB_REPO: fluent-bit
+            IMAGE_TAG: 3.1.1-amd64
+            CONTEXT: fluent-bit
             PLATFORM: linux/amd64
         run: |
           docker buildx build --platform $PLATFORM -t registry.cn-beijing.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG -f $CONTEXT/Dockerfile .
