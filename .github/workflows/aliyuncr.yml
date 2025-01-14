@@ -27,9 +27,9 @@ jobs:
           password: "${{ secrets.REGISTRY_PASSWORD }}"
       - name: Build and push image
         env:
-            DOCKERHUB_REPO: nginx
-            IMAGE_TAG: 1.9
-            CONTEXT: nginx
+            DOCKERHUB_REPO: rancher
+            IMAGE_TAG: v2.7.6
+            CONTEXT: rancher
             PLATFORM: linux/amd64
         run: |
           docker buildx build --platform $PLATFORM -t registry.cn-beijing.aliyuncs.com/hillexternal/$DOCKERHUB_REPO:$IMAGE_TAG -f $CONTEXT/Dockerfile .
